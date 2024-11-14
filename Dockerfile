@@ -6,14 +6,14 @@
 #
 # Build stage
 #
-FROM maven:3.8.2-jdk-11 AS build
+FROM maven:3.8.4-eclipse-temurin-17 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
 #
 # Package stage
 #
-FROM openjdk:11-jdk-slim
+FROM eclipse-temurin:17.0.3_7-jre-focal
 COPY --from=build /target/car-management-0.0.1-SNAPSHOT.jar demo.jar
 # ENV PORT=8080
 EXPOSE 8080
